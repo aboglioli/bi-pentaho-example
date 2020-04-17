@@ -140,9 +140,14 @@
     </VirtualCubeMeasure>
     <VirtualCubeMeasure cubeName="Incidentes" name="[Measures].[Cantidad Incidentes]" visible="true">
     </VirtualCubeMeasure>
-    <CalculatedMember name="Despachos por Incidente" formatString="" formula="" dimension="Measures" visible="true">
+    <CalculatedMember name="Incidentes sin despachos" formatString="" formula="" dimension="Measures" visible="true">
       <Formula>
-        <![CDATA[[Measures].[Cantidad Despachos] / [Measures].[Cantidad Incidentes]]]>
+        <![CDATA[[Measures].[Cantidad Incidentes] - [Measures].[Cantidad Despachos]]]>
+      </Formula>
+    </CalculatedMember>
+    <CalculatedMember name="Porcentaje de despachos" formatString="" formula="" dimension="Measures" visible="true">
+      <Formula>
+        <![CDATA[([Measures].[Cantidad Despachos] / [Measures].[Cantidad Incidentes]) * 100]]>
       </Formula>
     </CalculatedMember>
   </VirtualCube>
