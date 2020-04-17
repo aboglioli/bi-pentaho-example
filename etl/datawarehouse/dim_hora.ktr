@@ -692,6 +692,14 @@ var hhmm12 = pad(hora % 12, 2)+ ":" + pad(minuto, 2) + " " + periodo;</jsScript_
         <rename>id_hora</rename>
       </field>
       <field>
+        <name>periodo</name>
+        <rename />
+      </field>
+      <field>
+        <name>parte_dia</name>
+        <rename />
+      </field>
+      <field>
         <name>hora</name>
         <rename />
       </field>
@@ -705,14 +713,6 @@ var hhmm12 = pad(hora % 12, 2)+ ":" + pad(minuto, 2) + " " + periodo;</jsScript_
       </field>
       <field>
         <name>hhmm12</name>
-        <rename />
-      </field>
-      <field>
-        <name>periodo</name>
-        <rename />
-      </field>
-      <field>
-        <name>parte_dia</name>
         <rename />
       </field>
       <field>

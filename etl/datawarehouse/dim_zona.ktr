@@ -590,19 +590,15 @@
       </field>
       <field>
         <name>pais</name>
-        <rename />
       </field>
       <field>
         <name>provincia</name>
-        <rename />
       </field>
       <field>
         <name>departamento</name>
-        <rename />
       </field>
       <field>
         <name>localidad</name>
-        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -634,11 +630,9 @@
     <fields>
       <field>
         <name>id</name>
-        <rename />
       </field>
       <field>
         <name>id_sub</name>
-        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
