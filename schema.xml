@@ -41,9 +41,9 @@
       </Level>
     </Hierarchy>
     <Hierarchy name="Por &#201;poca" visible="true" hasAll="true" primaryKey="id_fecha">
-      <Table name="dimTiempo" alias="">
+      <Table name="dimTiempo">
       </Table>
-      <Level name="Estaci&#243;n" visible="true" column="estacion" type="String" uniqueMembers="false">
+      <Level name="Estaci&#243;n" visible="true" column="estacion" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
@@ -55,9 +55,9 @@
       </Level>
       <Level name="Parte del D&#237;a" visible="true" column="parte_dia" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
-      <Level name="Hora" visible="true" column="hora" type="Integer" uniqueMembers="false">
+      <Level name="Hora" visible="true" column="hora" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
-      <Level name="Minuto" visible="true" column="minuto" type="Integer" uniqueMembers="false">
+      <Level name="Minuto" visible="true" column="minuto" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
@@ -127,25 +127,22 @@
     <Measure name="Cantidad Incidentes" column="cantidad" aggregator="sum" visible="true">
     </Measure>
   </Cube>
-  <VirtualCube enabled="true" name="Incidentes &#38; Despachos">
-    <VirtualCubeDimension name="Tiempo">
+  <VirtualCube enabled="true" name="Incidentes &#38; Despachos" visible="true">
+    <VirtualCubeDimension visible="true" highCardinality="false" name="Tiempo">
     </VirtualCubeDimension>
-    <VirtualCubeDimension name="Zona">
+    <VirtualCubeDimension visible="true" highCardinality="false" name="Zona">
     </VirtualCubeDimension>
-    <VirtualCubeDimension name="C&#243;digo">
+    <VirtualCubeDimension visible="true" highCardinality="false" name="C&#243;digo">
     </VirtualCubeDimension>
-    <VirtualCubeDimension name="Hora">
+    <VirtualCubeDimension visible="true" highCardinality="false" name="Hora">
     </VirtualCubeDimension>
     <VirtualCubeMeasure cubeName="Despachos" name="[Measures].[Cantidad Despachos]" visible="true">
     </VirtualCubeMeasure>
     <VirtualCubeMeasure cubeName="Incidentes" name="[Measures].[Cantidad Incidentes]" visible="true">
     </VirtualCubeMeasure>
-    <CalculatedMember name="Incidentes sin despachos" formatString="" formula="" dimension="Measures" visible="true">
-      <Formula>
-        <![CDATA[[Measures].[Cantidad Incidentes] - [Measures].[Cantidad Despachos]]]>
-      </Formula>
+    <CalculatedMember name="Incidentes sin despachos" formula="[Measures].[Cantidad Incidentes] - [Measures].[Cantidad Despachos]" dimension="Measures" visible="true">
     </CalculatedMember>
-    <CalculatedMember name="Porcentaje de despachos" formatString="" formula="" dimension="Measures" visible="true">
+    <CalculatedMember name="Porcentaje de despachos" dimension="Measures" visible="true">
       <Formula>
         <![CDATA[([Measures].[Cantidad Despachos] / [Measures].[Cantidad Incidentes]) * 100]]>
       </Formula>
