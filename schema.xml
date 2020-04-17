@@ -1,0 +1,134 @@
+<Schema name="Emergencias Valle de Uco">
+  <Dimension type="StandardDimension" visible="true" name="Zona">
+    <Hierarchy name="Por Zona" visible="true" hasAll="true" primaryKey="id_zona">
+      <Table name="dimZona" alias="">
+      </Table>
+      <Level name="Pa&#237;s" visible="true" column="pais" type="String" uniqueMembers="false">
+      </Level>
+      <Level name="Provincia" visible="true" column="provincia" type="String" uniqueMembers="false">
+      </Level>
+      <Level name="Departamento" visible="true" column="departamento" type="String" uniqueMembers="false">
+      </Level>
+      <Level name="Localidad" visible="true" column="localidad" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="C&#243;digo">
+    <Hierarchy name="Por C&#243;digo" visible="true" hasAll="true" primaryKey="id_codigo">
+      <Table name="dimCodigo" alias="">
+      </Table>
+      <Level name="C&#243;digo" visible="true" column="descripcion" ordinalColumn="codigo" type="String" uniqueMembers="false">
+        <Property name="Descripci&#243;n" column="descripcion">
+        </Property>
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="Tiempo">
+    <Hierarchy name="Por Tiempo" visible="true" hasAll="true" primaryKey="id_fecha">
+      <Table name="dimTiempo" alias="">
+      </Table>
+      <Level name="A&#241;o" visible="true" column="anio" type="Integer" uniqueMembers="false">
+      </Level>
+      <Level name="Semestre" visible="true" column="semestre" type="Integer" uniqueMembers="false">
+      </Level>
+      <Level name="Trimestre" visible="true" column="trimestre" type="Integer" uniqueMembers="false">
+      </Level>
+      <Level name="Mes" visible="true" column="mes" ordinalColumn="mes_nro" type="String" uniqueMembers="false">
+      </Level>
+      <Level name="Semana" visible="true" column="semana_mes" type="Integer" uniqueMembers="false">
+      </Level>
+      <Level name="D&#237;a de Semana" visible="true" column="dia_semana" ordinalColumn="dia_semana_nro" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Por &#201;poca" visible="true" hasAll="true" primaryKey="id_fecha">
+      <Table name="dimTiempo" alias="">
+      </Table>
+      <Level name="Estaci&#243;n" visible="true" column="estacion" type="String" uniqueMembers="false">
+      </Level>
+      <Level name="Mes" visible="true" column="mes" ordinalColumn="mes_nro" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="Hora">
+    <Hierarchy name="Por Hora" visible="true" hasAll="true" primaryKey="id_hora">
+      <Table name="dimHora" alias="">
+      </Table>
+      <Level name="Per&#237;odo" visible="true" column="periodo" type="String" uniqueMembers="false">
+      </Level>
+      <Level name="Parte del D&#237;a" visible="true" column="parte_dia" type="String" uniqueMembers="false">
+      </Level>
+      <Level name="Hora" visible="true" column="hora" type="Integer" uniqueMembers="false">
+      </Level>
+      <Level name="Minuto" visible="true" column="minuto" type="Integer" uniqueMembers="false">
+        <Property name="HHMM" column="hhmm24">
+        </Property>
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="Despachos" visible="true" cache="true" enabled="true">
+    <Table name="factDespacho" alias="">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_base" name="Base">
+      <Hierarchy name="Por Base" visible="true" hasAll="true" primaryKey="id_base">
+        <Table name="dimBase" alias="">
+        </Table>
+        <Level name="Base" visible="true" column="base" type="String" uniqueMembers="false">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_institucion" name="Instituci&#243;n">
+      <Hierarchy name="Por Instituci&#243;n" visible="true" hasAll="true" primaryKey="id_institucion">
+        <Table name="dimInstitucion" alias="">
+        </Table>
+        <Level name="Instituci&#243;n" visible="true" column="institucion" type="String" uniqueMembers="false">
+          <Property name="Descripci&#243;n" column="descripcion" type="String">
+          </Property>
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_movil" name="M&#243;vil">
+      <Hierarchy name="Por M&#243;vil" visible="true" hasAll="true" primaryKey="id_movil">
+        <Table name="dimMovil" alias="">
+        </Table>
+        <Level name="M&#243;vil" visible="true" column="movil" type="String" uniqueMembers="false">
+          <Property name="Activo" column="activo" type="Integer">
+          </Property>
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_desenlace" name="Desenlace">
+      <Hierarchy name="Por Desenlace" visible="true" hasAll="true" primaryKey="id_desenlace">
+        <Table name="dimDesenlace" alias="">
+        </Table>
+        <Level name="Desenlace" visible="true" column="desenlace" type="String" uniqueMembers="false">
+          <Property name="Tipo" column="tipo" type="String">
+          </Property>
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <DimensionUsage source="Zona" name="Zona" visible="true" foreignKey="id_zona">
+    </DimensionUsage>
+    <DimensionUsage source="C&#243;digo" name="C&#243;digo" visible="true" foreignKey="id_codigo">
+    </DimensionUsage>
+    <DimensionUsage source="Tiempo" name="Tiempo" visible="true" foreignKey="id_fecha">
+    </DimensionUsage>
+    <DimensionUsage source="Hora" name="Hora" visible="true" foreignKey="id_hora">
+    </DimensionUsage>
+    <Measure name="Cantidad" column="cantidad" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Incidentes" visible="true" cache="true" enabled="true">
+    <Table name="factIncidente" alias="">
+    </Table>
+    <DimensionUsage source="Zona" name="Zona" visible="true" foreignKey="id_zona">
+    </DimensionUsage>
+    <DimensionUsage source="C&#243;digo" name="C&#243;digo" visible="true" foreignKey="id_codigo">
+    </DimensionUsage>
+    <DimensionUsage source="Tiempo" name="Tiempo" visible="true" foreignKey="id_fecha">
+    </DimensionUsage>
+    <DimensionUsage source="Hora" name="Hora" visible="true" foreignKey="id_hora">
+    </DimensionUsage>
+    <Measure name="Cantidad" column="cantidad" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
