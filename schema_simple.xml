@@ -127,33 +127,4 @@
     <Measure name="Cantidad Incidentes" column="cantidad" aggregator="sum" visible="true">
     </Measure>
   </Cube>
-  <VirtualCube enabled="true" name="Incidentes &#38; Despachos" visible="true">
-    <VirtualCubeDimension visible="true" highCardinality="false" name="Tiempo">
-    </VirtualCubeDimension>
-    <VirtualCubeDimension visible="true" highCardinality="false" name="Zona">
-    </VirtualCubeDimension>
-    <VirtualCubeDimension visible="true" highCardinality="false" name="C&#243;digo">
-    </VirtualCubeDimension>
-    <VirtualCubeDimension visible="true" highCardinality="false" name="Hora">
-    </VirtualCubeDimension>
-    <VirtualCubeMeasure cubeName="Despachos" name="[Measures].[Cantidad Despachos]" visible="true">
-    </VirtualCubeMeasure>
-    <VirtualCubeMeasure cubeName="Incidentes" name="[Measures].[Cantidad Incidentes]" visible="true">
-    </VirtualCubeMeasure>
-    <CalculatedMember name="Incidentes sin despachos" formula="[Measures].[Cantidad Incidentes] - [Measures].[Cantidad Despachos]" dimension="Measures" visible="true">
-    </CalculatedMember>
-    <CalculatedMember name="Porcentaje de despachos" dimension="Measures" visible="true">
-      <Formula>
-        <![CDATA[([Measures].[Cantidad Despachos] / [Measures].[Cantidad Incidentes]) * 100]]>
-      </Formula>
-    </CalculatedMember>
-  </VirtualCube>
-  <Role name="Administrador">
-    <SchemaGrant access="all">
-      <CubeGrant cube="Despachos" access="all">
-      </CubeGrant>
-      <CubeGrant cube="Incidentes" access="all">
-      </CubeGrant>
-    </SchemaGrant>
-  </Role>
 </Schema>
